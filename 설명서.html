@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>배민 수집기 설명서</title>
+<style>
+  :root {
+    --bg: #f8f9fa;
+    --card: #ffffff;
+    --text: #333333;
+    --text-sub: #666666;
+    --accent: #2d9cdb;
+    --accent2: #27ae60;
+    --accent3: #e67e22;
+    --accent4: #8e44ad;
+    --border: #e0e0e0;
+    --code-bg: #f0f4f8;
+    --step-line: #2d9cdb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    padding: 20px 16px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  h1 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 8px;
+    color: var(--accent);
+  }
+  .subtitle {
+    text-align: center;
+    color: var(--text-sub);
+    font-size: 15px;
+    margin-bottom: 32px;
+  }
+  h2 {
+    font-size: 22px;
+    color: var(--accent);
+    margin: 36px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+  }
+  h3 {
+    font-size: 17px;
+    color: var(--text);
+    margin: 20px 0 8px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 16px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .analogy {
+    background: #fff8e1;
+    border-left: 4px solid var(--accent3);
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  .analogy::before {
+    content: "비유 ";
+    font-weight: bold;
+    color: var(--accent3);
+  }
+  .file-tree {
+    background: var(--code-bg);
+    padding: 16px 20px;
+    border-radius: 8px;
+    font-family: 'Consolas', 'D2Coding', monospace;
+    font-size: 13px;
+    line-height: 1.9;
+    overflow-x: auto;
+  }
+  .file-tree .comment { color: var(--text-sub); }
+  .flow-steps {
+    position: relative;
+    padding-left: 32px;
+    margin: 16px 0;
+  }
+  .flow-steps::before {
+    content: '';
+    position: absolute;
+    left: 13px;
+    top: 4px;
+    bottom: 4px;
+    width: 3px;
+    background: var(--step-line);
+    border-radius: 2px;
+  }
+  .step {
+    position: relative;
+    margin-bottom: 18px;
+  }
+  .step::before {
+    content: attr(data-num);
+    position: absolute;
+    left: -32px;
+    top: 0;
+    width: 28px;
+    height: 28px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: bold;
+  }
+  .step-title { font-weight: bold; font-size: 15px; }
+  .step-desc { font-size: 14px; color: var(--text-sub); margin-top: 2px; }
+  .tech-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  .tech-table th {
+    background: var(--accent);
+    color: white;
+    padding: 10px 14px;
+    text-align: left;
+  }
+  .tech-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tech-table tr:nth-child(even) td { background: #f7f9fc; }
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+  }
+  .badge-blue { background: var(--accent); }
+  .badge-green { background: var(--accent2); }
+  .badge-orange { background: var(--accent3); }
+  .badge-purple { background: var(--accent4); }
+  .diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  .diagram .box {
+    background: var(--accent);
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 100px;
+  }
+  .diagram .arrow {
+    font-size: 22px;
+    color: var(--accent);
+  }
+  .highlight-box {
+    background: #e8f5e9;
+    border-left: 4px solid var(--accent2);
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  code {
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Consolas', 'D2Coding', monospace;
+    font-size: 13px;
+  }
+  footer {
+    text-align: center;
+    margin-top: 48px;
+    padding: 20px;
+    color: var(--text-sub);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+  }
+  @media print {
+    body { padding: 0; background: white; }
+    .card { box-shadow: none; border: 1px solid #ccc; }
+    h2 { page-break-before: auto; }
+    .step { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<h1>배민 업체 수집기 설명서</h1>
+<p class="subtitle">프로젝트 구조와 기능을 쉽게 알아보기</p>
+
+<!-- ===== 1. 이게 뭐하는 프로그램? ===== -->
+<h2>1. 이게 뭐하는 프로그램이야?</h2>
+
+<div class="card">
+  <p>배달의민족(배민) 앱에 나오는 <strong>음식점 이름, 별점(평점), 리뷰 수</strong>를 자동으로 모아주는 프로그램이에요.</p>
+  <p style="margin-top:8px">사람이 하나하나 보면서 적는 대신, 컴퓨터가 화면을 사진 찍고 &rarr; 글자를 읽고 &rarr; 정리해서 엑셀 파일로 저장해 줍니다.</p>
+</div>
+
+<div class="analogy">
+  수학 시험지를 카메라로 찍어서 앱이 문제를 읽어주는 것과 비슷해요. 이 프로그램은 배민 화면을 찍어서 음식점 정보를 읽어내는 거예요.
+</div>
+
+<!-- ===== 2. 전체 흐름 ===== -->
+<h2>2. 어떤 순서로 동작해?</h2>
+
+<div class="diagram">
+  <div class="box">배민 앱 화면<br>스크린샷</div>
+  <div class="arrow">&rarr;</div>
+  <div class="box">글자 인식<br>(OCR)</div>
+  <div class="arrow">&rarr;</div>
+  <div class="box">이름/평점/리뷰<br>뽑아내기</div>
+  <div class="arrow">&rarr;</div>
+  <div class="box">중복 제거</div>
+  <div class="arrow">&rarr;</div>
+  <div class="box">엑셀 저장</div>
+</div>
+
+<div class="flow-steps">
+  <div class="step" data-num="1">
+    <div class="step-title">BlueStacks 창 찾기</div>
+    <div class="step-desc">컴퓨터에서 실행 중인 BlueStacks(안드로이드 에뮬레이터) 창의 위치와 크기를 알아냅니다.</div>
+  </div>
+  <div class="step" data-num="2">
+    <div class="step-title">화면 캡처 (스크린샷)</div>
+    <div class="step-desc">찾은 창 영역만 잘라서 사진을 찍어요. 마치 화면 캡처 단축키를 누르는 것과 같아요.</div>
+  </div>
+  <div class="step" data-num="3">
+    <div class="step-title">OCR로 글자 읽기</div>
+    <div class="step-desc">찍은 사진에서 글자를 인식해요. "카페그리닝 ★4.8 (48)" 같은 텍스트로 변환됩니다.</div>
+  </div>
+  <div class="step" data-num="4">
+    <div class="step-title">업체 정보 추출</div>
+    <div class="step-desc">읽어낸 글자에서 <strong>업체명</strong>, <strong>평점</strong>, <strong>리뷰 수</strong>를 골라냅니다. 버튼이나 광고 같은 쓸모없는 글자는 걸러내요.</div>
+  </div>
+  <div class="step" data-num="5">
+    <div class="step-title">평점 재시도 (누락 시)</div>
+    <div class="step-desc">★ 표시를 못 읽었으면, 그 줄만 잘라서 3배로 크게 확대한 뒤 다시 읽어봐요.</div>
+  </div>
+  <div class="step" data-num="6">
+    <div class="step-title">중복 제거</div>
+    <div class="step-desc">스크롤하다 보면 같은 가게가 또 나올 수 있어요. 이름이 80% 이상 비슷하면 같은 가게로 취급합니다.</div>
+  </div>
+  <div class="step" data-num="7">
+    <div class="step-title">스크롤 &amp; 반복</div>
+    <div class="step-desc">목표한 업체 수를 채울 때까지 아래로 스크롤하면서 2~6번을 반복합니다.</div>
+  </div>
+  <div class="step" data-num="8">
+    <div class="step-title">결과 저장</div>
+    <div class="step-desc">모은 데이터를 엑셀 파일(.xlsx)과 JSON 파일로 저장합니다.</div>
+  </div>
+</div>
+
+<!-- ===== 3. 파일 구조 ===== -->
+<h2>3. 파일은 어떻게 생겼어?</h2>
+
+<div class="card">
+<div class="file-tree">
+baemin-scraper/<br>
+├── <strong>scraper.py</strong> <span class="comment">← 모든 핵심 로직이 여기에 (두뇌)</span><br>
+├── <strong>config.json</strong> <span class="comment">← 설정값 모음 (리모컨)</span><br>
+├── <strong>install.cmd</strong> <span class="comment">← 필요한 패키지 설치 (더블클릭)</span><br>
+├── <strong>run.cmd</strong> <span class="comment">← 수집 시작 (더블클릭)</span><br>
+├── <strong>test.cmd</strong> <span class="comment">← 테스트 실행 (더블클릭)</span><br>
+└── output/ <span class="comment">← 결과물이 저장되는 폴더</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── 배민_날짜_시간.xlsx <span class="comment">← 엑셀 결과</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── 배민_날짜_시간.json <span class="comment">← JSON 결과</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;└── step_001.png ... <span class="comment">← 캡처 이미지들</span>
+</div>
+</div>
+
+<div class="analogy">
+  학교에 비유하면: <code>scraper.py</code>는 공부를 실제로 하는 <strong>학생</strong>, <code>config.json</code>은 학생에게 지시를 내리는 <strong>선생님의 지시서</strong>, <code>output/</code> 폴더는 학생이 정리해서 제출하는 <strong>과제 노트</strong>예요.
+</div>
+
+<!-- ===== 4. 핵심 파트 설명 ===== -->
+<h2>4. 핵심 기능 하나씩 뜯어보기</h2>
+
+<!-- OCR -->
+<h3><span class="badge badge-blue">기능 1</span> OCR — 사진에서 글자 읽기</h3>
+<div class="card">
+  <p><strong>OCR</strong>은 Optical Character Recognition의 약자로, <em>사진 속 글자를 텍스트로 바꾸는 기술</em>이에요.</p>
+  <p style="margin-top:8px">이 프로그램은 두 가지 OCR 엔진을 지원해요:</p>
+  <table class="tech-table">
+    <tr><th>엔진</th><th>특징</th><th>비용</th></tr>
+    <tr>
+      <td><strong>easyocr</strong> (기본)</td>
+      <td>내 컴퓨터에서 직접 돌림. 약간 느리지만 무료</td>
+      <td>무료</td>
+    </tr>
+    <tr>
+      <td><strong>anthropic</strong></td>
+      <td>Claude AI에게 사진을 보내서 읽어달라고 요청. 빠르고 정확</td>
+      <td>유료 (1장당 약 10~20원)</td>
+    </tr>
+  </table>
+  <p style="margin-top:12px"><code>config.json</code>에서 <code>"engine": "easyocr"</code> 부분을 바꾸면 엔진을 쉽게 전환할 수 있어요.</p>
+</div>
+
+<div class="analogy">
+  easyocr는 <strong>내 머릿속에서 직접 글자를 읽는 것</strong>이고, anthropic은 <strong>옆에 있는 똑똑한 친구에게 "이거 뭐라고 써있어?"라고 물어보는 것</strong>이에요.
+</div>
+
+<!-- 파싱 -->
+<h3><span class="badge badge-green">기능 2</span> 파싱 — 필요한 정보만 골라내기</h3>
+<div class="card">
+  <p>OCR이 읽어낸 텍스트는 온갖 잡다한 글자가 섞여 있어요.</p>
+  <p style="margin-top:8px">예를 들어 화면에는 "기본순", "배달팁", "음식배달" 같은 <strong>버튼 글자</strong>도 있고,
+     "카페그리닝 ★4.8 (48)" 같은 <strong>음식점 정보</strong>도 있어요.</p>
+  <p style="margin-top:8px">프로그램은 <strong>정규식(regex)</strong>이라는 패턴 매칭 도구를 써서:</p>
+  <ul style="margin:8px 0 0 20px">
+    <li>"이름 + 숫자.숫자 + (숫자)" 패턴을 찾으면 &rarr; 업체명, 평점, 리뷰 수로 분류</li>
+    <li>"기본순", "배달팁" 같은 UI 텍스트 &rarr; 무시</li>
+    <li>숫자만 있는 이름 &rarr; 무시</li>
+  </ul>
+</div>
+
+<div class="analogy">
+  쏟아진 레고 조각 중에서 <strong>빨간색 블록만 골라내는 것</strong>과 비슷해요. 정규식은 "빨간색이고 네모난 것"처럼 조건을 미리 정해놓고 자동으로 골라내는 규칙이에요.
+</div>
+
+<!-- 평점 재시도 -->
+<h3><span class="badge badge-orange">기능 3</span> 평점 재시도 — 못 읽었으면 확대해서 다시</h3>
+<div class="card">
+  <p>★ 기호는 OCR이 놓치는 경우가 많아요. 그래서:</p>
+  <ol style="margin:8px 0 0 20px">
+    <li>평점이 빠진 업체를 발견하면</li>
+    <li>그 업체가 있는 줄의 위아래 20픽셀을 잘라내고</li>
+    <li><strong>3배로 확대</strong>한 뒤</li>
+    <li>다시 OCR을 돌려서 평점을 찾아요</li>
+  </ol>
+</div>
+
+<div class="analogy">
+  칠판 글씨가 안 보이면 <strong>돋보기로 확대해서 다시 보는 것</strong>과 같아요!
+</div>
+
+<!-- 스크롤 -->
+<h3><span class="badge badge-purple">기능 4</span> 사람처럼 스크롤하기</h3>
+<div class="card">
+  <p>봇이 일정한 속도로 스크롤하면 앱이 눈치챌 수 있어요. 그래서:</p>
+  <ul style="margin:8px 0 0 20px">
+    <li>스크롤 시작·끝 위치를 매번 살짝 다르게 (좌우 흔들림)</li>
+    <li>스크롤 사이에 1.8~3.5초 랜덤 대기</li>
+    <li>12% 확률로 5~9초 긴 쉼 (사람이 메뉴를 읽는 것처럼)</li>
+  </ul>
+</div>
+
+<div class="analogy">
+  로봇이 아니라 <strong>실제 사람이 폰을 넘기면서 메뉴를 구경하는 것처럼</strong> 행동하는 거예요. 가끔 멈춰서 고민하는 척도 해요!
+</div>
+
+<!-- 중복 제거 -->
+<h3><span class="badge badge-blue">기능 5</span> 중복 제거 — 같은 가게 거르기</h3>
+<div class="card">
+  <p>스크롤하면 이전 화면에 있던 가게가 다음 화면에도 나와요.</p>
+  <p style="margin-top:8px">프로그램은 두 이름의 글자가 <strong>80% 이상 겹치면</strong> 같은 가게로 판단해요.</p>
+  <p style="margin-top:8px">예시:</p>
+  <ul style="margin:8px 0 0 20px">
+    <li>"카페그리닝" vs "카페그리닝 정발산점" &rarr; 같은 가게 (포함 관계)</li>
+    <li>"파스타입니다 일산점" vs "파스타엔우 일산후곡점" &rarr; 다른 가게 (겹침 73%)</li>
+  </ul>
+</div>
+
+<!-- ===== 5. 설정 파일 ===== -->
+<h2>5. config.json 설명</h2>
+<div class="card">
+  <table class="tech-table">
+    <tr><th>설정</th><th>뜻</th><th>기본값</th></tr>
+    <tr><td><code>ocr.engine</code></td><td>어떤 글자 인식 엔진을 쓸지</td><td>easyocr</td></tr>
+    <tr><td><code>ocr.gpu</code></td><td>그래픽카드로 빠르게 처리할지</td><td>false (CPU만)</td></tr>
+    <tr><td><code>ocr.mag_ratio</code></td><td>이미지 확대 비율</td><td>0.85</td></tr>
+    <tr><td><code>scroll.pause_min/max</code></td><td>스크롤 후 쉬는 시간 범위</td><td>1.8~3.5초</td></tr>
+    <tr><td><code>scroll.long_pause_chance</code></td><td>길게 쉴 확률</td><td>12%</td></tr>
+    <tr><td><code>collect.max_no_new</code></td><td>새 업체 없으면 몇 번 후 포기</td><td>3번</td></tr>
+    <tr><td><code>collect.default_count</code></td><td>기본 수집 목표</td><td>30개</td></tr>
+  </table>
+</div>
+
+<div class="highlight-box">
+  <strong>config.json은 왜 필요할까?</strong><br>
+  코드를 직접 수정하지 않아도 이 파일만 고치면 동작 방식을 바꿀 수 있어요. 마치 게임 설정에서 난이도를 바꾸는 것처럼요!
+</div>
+
+<!-- ===== 6. 사용된 기술 ===== -->
+<h2>6. 어떤 기술이 쓰였어?</h2>
+<div class="card">
+  <table class="tech-table">
+    <tr><th>도구</th><th>역할</th></tr>
+    <tr><td><strong>Python</strong></td><td>프로그래밍 언어. 모든 코드가 Python으로 짜여 있어요</td></tr>
+    <tr><td><strong>BlueStacks</strong></td><td>PC에서 안드로이드 앱을 실행하는 에뮬레이터</td></tr>
+    <tr><td><strong>easyocr</strong></td><td>사진에서 한국어/영어 글자를 읽어내는 AI 라이브러리</td></tr>
+    <tr><td><strong>pyautogui</strong></td><td>마우스 이동, 클릭, 스크린샷을 자동으로 해주는 도구</td></tr>
+    <tr><td><strong>pygetwindow</strong></td><td>열려 있는 창 목록에서 원하는 창을 찾아주는 도구</td></tr>
+    <tr><td><strong>openpyxl</strong></td><td>엑셀 파일(.xlsx)을 만들어주는 도구</td></tr>
+    <tr><td><strong>정규식 (regex)</strong></td><td>텍스트에서 특정 패턴을 찾아내는 규칙 언어</td></tr>
+  </table>
+</div>
+
+<!-- ===== 7. 실행 방법 ===== -->
+<h2>7. 어떻게 실행해?</h2>
+
+<div class="card">
+  <div class="flow-steps">
+    <div class="step" data-num="1">
+      <div class="step-title">패키지 설치 (처음 한 번만)</div>
+      <div class="step-desc"><code>install.cmd</code>를 더블클릭해요. 필요한 도구들이 자동으로 설치됩니다.</div>
+    </div>
+    <div class="step" data-num="2">
+      <div class="step-title">BlueStacks에서 배민 앱 열기</div>
+      <div class="step-desc">블루스택스를 실행하고, 배민 앱에서 원하는 카테고리(양식, 중식 등)의 업체 목록 화면을 띄워 놓아요.</div>
+    </div>
+    <div class="step" data-num="3">
+      <div class="step-title">수집 시작</div>
+      <div class="step-desc"><code>run.cmd</code>를 더블클릭하면 수집이 시작돼요. 화면을 자동으로 넘기면서 업체를 모아줍니다.</div>
+    </div>
+    <div class="step" data-num="4">
+      <div class="step-title">결과 확인</div>
+      <div class="step-desc"><code>output</code> 폴더에 엑셀 파일이 생겨요. 열어보면 업체명, 평점, 리뷰 수가 깔끔하게 정리되어 있어요!</div>
+    </div>
+  </div>
+</div>
+
+<div class="highlight-box">
+  <strong>긴급 중단:</strong> 수집 중 마우스를 화면 왼쪽 위 구석으로 옮기면 바로 멈춰요.
+</div>
+
+<!-- ===== 8. 요약 ===== -->
+<h2>8. 한 줄 요약</h2>
+<div class="card" style="text-align:center; font-size:17px; padding:28px;">
+  <strong>배민 앱 화면을 자동으로 찍고 &rarr; AI가 글자를 읽고 &rarr; 음식점 정보만 골라서 &rarr; 엑셀로 정리해주는 프로그램</strong>
+</div>
+
+<footer>
+  배민 업체 수집기 v2.0 &middot; 2026-10-13 &middot; easyocr + pyautogui 기반
+</footer>
+
+</body>
+</html>

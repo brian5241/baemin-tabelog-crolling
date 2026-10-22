@@ -1,0 +1,326 @@
+<title>배민 수집기 요약</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  /* Layout: single-column report, tight sections, no fluff */
+  :root {
+    --bg: #fafbfc;
+    --surface: #ffffff;
+    --fg: #1a1d23;
+    --fg-sub: #5c6370;
+    --accent: #1a73e8;
+    --accent-soft: #e8f0fe;
+    --border: #e1e4e8;
+    --code-bg: #f1f3f5;
+    --green: #137333;
+    --green-soft: #e6f4ea;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --fg: #e6edf3;
+      --fg-sub: #8b949e;
+      --accent: #58a6ff;
+      --accent-soft: #1a2332;
+      --border: #30363d;
+      --code-bg: #1c2128;
+      --green: #3fb950;
+      --green-soft: #1a2e1f;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --fg: #e6edf3;
+    --fg-sub: #8b949e;
+    --accent: #58a6ff;
+    --accent-soft: #1a2332;
+    --border: #30363d;
+    --code-bg: #1c2128;
+    --green: #3fb950;
+    --green-soft: #1a2e1f;
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Noto Sans KR', sans-serif;
+    padding-inline: 24px;
+    padding-block: 0;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  header {
+    padding: 40px 0 28px;
+    border-bottom: 2px solid var(--accent);
+  }
+  header h1 {
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    margin: 0;
+  }
+  header p {
+    color: var(--fg-sub);
+    font-size: 14px;
+    margin: 6px 0 0;
+  }
+
+  section { padding: 28px 0; border-bottom: 1px solid var(--border); }
+  section:last-of-type { border-bottom: none; }
+
+  h2 {
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--accent);
+    margin: 0 0 16px;
+  }
+  h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 16px 0 6px;
+  }
+  p, li { font-size: 14px; line-height: 1.7; }
+  p { margin: 0 0 10px; }
+  ul { margin: 0 0 10px; padding-left: 20px; }
+  li { margin-bottom: 4px; }
+
+  .summary-box {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.65;
+  }
+
+  .tree {
+    background: var(--code-bg);
+    border-radius: 6px;
+    padding: 14px 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    line-height: 2;
+    overflow-x: auto;
+    min-width: 0;
+  }
+  .tree .c { color: var(--fg-sub); }
+
+  .flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    margin: 12px 0;
+  }
+  .flow-step {
+    background: var(--accent);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .flow-arrow { color: var(--fg-sub); font-size: 14px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    margin: 10px 0;
+  }
+  th {
+    text-align: left;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--fg-sub);
+    padding: 8px 12px;
+    border-bottom: 2px solid var(--border);
+  }
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.3px;
+  }
+  .tag-done { background: var(--green-soft); color: var(--green); }
+  .tag-ready { background: var(--accent-soft); color: var(--accent); }
+
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    background: var(--code-bg);
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+
+  footer {
+    padding: 20px 0 40px;
+    font-size: 12px;
+    color: var(--fg-sub);
+    text-align: center;
+  }
+</style>
+
+<header>
+  <h1>배민 업체 수집기 v2.0</h1>
+  <p>BlueStacks + OCR 기반 배달의민족 업체 자동 수집 도구 &middot; 2026-10-13</p>
+</header>
+
+<!-- 한줄 요약 -->
+<section>
+  <h2>개요</h2>
+  <div class="summary-box">
+    BlueStacks 에뮬레이터에서 실행 중인 배민 앱 화면을 자동으로 캡처하고, OCR(글자 인식)로 <strong>업체명 / 평점 / 리뷰 수</strong>를 추출하여 엑셀 및 JSON 파일로 저장하는 자동화 스크립트.
+  </div>
+</section>
+
+<!-- 동작 흐름 -->
+<section>
+  <h2>동작 흐름</h2>
+  <div class="flow">
+    <span class="flow-step">창 감지</span><span class="flow-arrow">&rarr;</span>
+    <span class="flow-step">스크린샷</span><span class="flow-arrow">&rarr;</span>
+    <span class="flow-step">OCR</span><span class="flow-arrow">&rarr;</span>
+    <span class="flow-step">파싱</span><span class="flow-arrow">&rarr;</span>
+    <span class="flow-step">평점 재시도</span><span class="flow-arrow">&rarr;</span>
+    <span class="flow-step">중복 제거</span><span class="flow-arrow">&rarr;</span>
+    <span class="flow-step">스크롤</span><span class="flow-arrow">&rarr;</span>
+    <span class="flow-step">반복</span><span class="flow-arrow">&rarr;</span>
+    <span class="flow-step">저장</span>
+  </div>
+  <p>목표 수를 채우거나 3회 연속 새 업체가 없을 때까지 자동 반복합니다.</p>
+</section>
+
+<!-- 파일 구조 -->
+<section>
+  <h2>파일 구조</h2>
+  <div class="tree">
+    baemin-scraper/<br>
+    ├── <strong>scraper.py</strong> <span class="c">── 메인 스크립트 (캡처, OCR, 파싱, 스크롤, 저장)</span><br>
+    ├── <strong>config.json</strong> <span class="c">── 설정 (엔진, 스크롤 타이밍, 수집 옵션)</span><br>
+    ├── <strong>install.cmd</strong> <span class="c">── 의존성 설치 (더블클릭)</span><br>
+    ├── <strong>run.cmd</strong> <span class="c">── 수집 실행</span><br>
+    ├── <strong>test.cmd</strong> <span class="c">── 1회 캡처 테스트</span><br>
+    └── output/ <span class="c">── 결과 (xlsx, json, 캡처 이미지)</span>
+  </div>
+</section>
+
+<!-- 핵심 기능 -->
+<section>
+  <h2>핵심 기능</h2>
+  <table>
+    <tr><th style="width:30%">기능</th><th>설명</th></tr>
+    <tr>
+      <td><strong>OCR 엔진 선택</strong></td>
+      <td><code>easyocr</code>(로컬, 무료) 또는 <code>anthropic</code>(Claude API, 유료). <code>config.json</code>에서 전환</td>
+    </tr>
+    <tr>
+      <td><strong>한국어 인식</strong></td>
+      <td>easyocr CRAFT + ResNet + LSTM 기반 한/영 동시 인식</td>
+    </tr>
+    <tr>
+      <td><strong>2단계 정규식 파싱</strong></td>
+      <td>패턴1: 이름+평점+리뷰 &middot; 패턴2(fallback): 이름+리뷰(평점 없음). UI 텍스트 필터링 적용</td>
+    </tr>
+    <tr>
+      <td><strong>평점 복구</strong></td>
+      <td>★ 누락 시 해당 영역 크롭 &rarr; 3배 확대(bicubic) &rarr; mag_ratio 1.5로 재OCR</td>
+    </tr>
+    <tr>
+      <td><strong>퍼지 중복 제거</strong></td>
+      <td>한글 기준 문자 겹침 80% 이상이면 동일 업체로 판단. 평점/리뷰 자동 병합</td>
+    </tr>
+    <tr>
+      <td><strong>봇 감지 회피</strong></td>
+      <td>랜덤 스와이프 좌표, 1.8~3.5초 대기, 12% 확률 장기 휴식(5~9초)</td>
+    </tr>
+    <tr>
+      <td><strong>결과 저장</strong></td>
+      <td>스타일 적용 엑셀(.xlsx) + JSON 동시 출력</td>
+    </tr>
+  </table>
+</section>
+
+<!-- 기술 스택 -->
+<section>
+  <h2>기술 스택</h2>
+  <table>
+    <tr><th style="width:30%">패키지</th><th>역할</th></tr>
+    <tr><td><code>easyocr</code></td><td>한국어/영어 OCR (CRAFT 텍스트 감지 + 인식)</td></tr>
+    <tr><td><code>pyautogui</code></td><td>스크린샷, 마우스 제어, 스와이프</td></tr>
+    <tr><td><code>pygetwindow</code></td><td>BlueStacks 창 탐색 및 활성화</td></tr>
+    <tr><td><code>openpyxl</code></td><td>엑셀 파일 생성 및 스타일링</td></tr>
+    <tr><td><code>torch</code> (CPU)</td><td>easyocr 딥러닝 추론 백엔드</td></tr>
+    <tr><td><code>anthropic</code></td><td>Claude API 엔진 사용 시 (선택)</td></tr>
+  </table>
+</section>
+
+<!-- 설정 -->
+<section>
+  <h2>config.json 주요 항목</h2>
+  <table>
+    <tr><th>키</th><th>기본값</th><th>설명</th></tr>
+    <tr><td><code>ocr.engine</code></td><td>easyocr</td><td>OCR 엔진 선택</td></tr>
+    <tr><td><code>ocr.gpu</code></td><td>false</td><td>GPU 가속 여부</td></tr>
+    <tr><td><code>ocr.mag_ratio</code></td><td>0.85</td><td>이미지 확대 비율</td></tr>
+    <tr><td><code>scroll.pause_min/max</code></td><td>1.8 / 3.5</td><td>스크롤 간 대기 범위(초)</td></tr>
+    <tr><td><code>collect.max_no_new</code></td><td>3</td><td>종료 조건: 연속 빈 스크롤 횟수</td></tr>
+    <tr><td><code>collect.default_count</code></td><td>30</td><td>기본 수집 목표</td></tr>
+  </table>
+</section>
+
+<!-- 실행 -->
+<section>
+  <h2>실행 방법</h2>
+  <h3>설치</h3>
+  <p><code>install.cmd</code> 실행 (CPU PyTorch + easyocr + 의존성 일괄 설치)</p>
+  <h3>수집</h3>
+  <ul>
+    <li><code>py scraper.py</code> &mdash; 기본 30개 수집</li>
+    <li><code>py scraper.py --count 50</code> &mdash; 50개 수집</li>
+    <li><code>py scraper.py --test</code> &mdash; 1회 캡처 확인</li>
+  </ul>
+  <h3>사전 조건</h3>
+  <ul>
+    <li>Python 3.9+</li>
+    <li>BlueStacks 실행 중 + 배민 앱에서 업체 목록 화면 표시</li>
+  </ul>
+</section>
+
+<!-- 현재 상태 -->
+<section>
+  <h2>현재 상태</h2>
+  <table>
+    <tr><th>항목</th><th>상태</th></tr>
+    <tr><td>easyocr 기반 수집</td><td><span class="tag tag-done">완료</span></td></tr>
+    <tr><td>평점 크롭 재시도</td><td><span class="tag tag-done">완료</span></td></tr>
+    <tr><td>퍼지 중복 제거 (80%)</td><td><span class="tag tag-done">완료</span></td></tr>
+    <tr><td>config.json 설정 분리</td><td><span class="tag tag-done">완료</span></td></tr>
+    <tr><td>봇 감지 회피 스크롤</td><td><span class="tag tag-done">완료</span></td></tr>
+    <tr><td>엑셀 + JSON 저장</td><td><span class="tag tag-done">완료</span></td></tr>
+    <tr><td>Claude API 엔진</td><td><span class="tag tag-ready">준비 (api_key 입력 시 사용 가능)</span></td></tr>
+    <tr><td>양식 카테고리 20개 수집 테스트</td><td><span class="tag tag-done">완료 (누락 0건)</span></td></tr>
+  </table>
+</section>
+
+<footer>
+  배민 업체 수집기 v2.0 &middot; easyocr + pyautogui &middot; 2026-10-13
+</footer>

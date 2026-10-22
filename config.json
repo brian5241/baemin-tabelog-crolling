@@ -1,0 +1,31 @@
+{
+  "ocr": {
+    "engine": "easyocr",
+    "gpu": false,
+    "mag_ratio": 1.5,
+    "min_width": 700,
+    "retry_mag_ratios": [2.0, 2.5],
+    "min_texts_before_retry": 5,
+    "languages": ["ko", "en"]
+  },
+  "tesseract": {
+    "path": "C:\\Program Files\\Tesseract-OCR\\tesseract.exe",
+    "lang": "kor+eng",
+    "psm": 6
+  },
+  "anthropic": {
+    "api_key": "",
+    "model": "claude-sonnet-4-20250514"
+  },
+  "scroll": {
+    "pause_min": 1.8,
+    "pause_max": 3.5,
+    "long_pause_chance": 0.12,
+    "long_pause_min": 5.0,
+    "long_pause_max": 9.0
+  },
+  "collect": {
+    "max_no_new": 3,
+    "default_count": 30
+  }
+}
