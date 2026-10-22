@@ -1,3 +1,29 @@
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Raw device data, screenshots and generated exports stay local
+captures/
+raw/
+data/
+exports/
+logs/
+platform-tools/
+*.xlsx
+*.jpg
+*.jpeg
+*.png
+*.xml
+
+# Runtime
+.venv/
 __pycache__/
+.DS_Store
+Thumbs.db
+
+# Scraper output
 output/
 *.pyc
